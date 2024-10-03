@@ -1,0 +1,59 @@
+<div class="container mt-5">
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-6">
+                    <h5>Create/Update Property</h5>
+                </div>
+                <div class="col-6 text-end">
+                    <!-- <button class="btn btn-sm btn-success" (click)="toggleView()">Go To List</button> -->
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <form>
+                <div class="row mb-3">
+                    <label for="propertyTitle" class="form-label">Property Title</label>
+                    <input type="text" #title="ngModel" required minlength="4" class="form-control" name="propertyTitle"
+                        [(ngModel)]="formObj.propertyTitle" id="propertyTitle" placeholder="Enter Property Title">
+                </div>
+                <div class="col-md-6">
+                    <label for="propertyTypeId" class="form-label">Select Property Type </label>
+                    <select name="propertyTypeId" #propertyTypeId="ngModel" required
+                        [(ngModel)]="formObj.propertyTypeId" class="form-select">
+                        <option value="">Select Property Type</option>
+                        <option [value]="1">Duplex</option>
+                        <option [value]="2">2 BHK</option>
+                        <option [value]="3">3 BHK</option>
+                    </select>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="location" class="form-label">Location</label>
+                        <input type="text" #location="ngModel" required class="form-control" name="location"
+                            [(ngModel)]="formObj.location" id="location" placeholder="Enter Location">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="pincode" class="form-label">Pincode</label>
+                        <input type="text" #pincode="ngModel" class="form-control" name="pincode" required
+                            [(ngModel)]="formObj.pincode" id="pincode" placeholder="Enter Pincode">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="city" class="form-label">City</label>
+                        <input type="text" class="form-control" name="city" [(ngModel)]="formObj.city" id="city"
+                            placeholder="Enter City">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="state" class="form-label">State</label>
+                        <input type="text" class="form-control" name="state" [(ngModel)]="formObj.state" id="state"
+                            placeholder="Enter State">
+                    </div>
+                </div>
+                <button type="button" (click)="onSave()" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
