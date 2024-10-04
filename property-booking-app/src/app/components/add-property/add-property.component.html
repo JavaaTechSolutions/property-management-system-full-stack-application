@@ -11,11 +11,23 @@
             </div>
         </div>
         <div class="card-body">
-            <form>
+            <form #myForm="ngForm">
                 <div class="row mb-3">
                     <label for="propertyTitle" class="form-label">Property Title</label>
                     <input type="text" #title="ngModel" required minlength="4" class="form-control" name="propertyTitle"
                         [(ngModel)]="formObj.propertyTitle" id="propertyTitle" placeholder="Enter Property Title">
+
+                    @if (title.touched) {
+                    <div class="text-danger">
+                        @if(title.errors?.['required']) {
+                        <span>This is Required</span>
+                        }
+
+                        @if (title.errors?.['minlength']) {
+                        <span>Min 5 Char Required</span>
+                        }
+                    </div>
+                    }
                 </div>
                 <div class="col-md-6">
                     <label for="propertyTypeId" class="form-label">Select Property Type </label>
@@ -26,33 +38,73 @@
                         <option [value]="2">2 BHK</option>
                         <option [value]="3">3 BHK</option>
                     </select>
+
+                    @if (propertyTypeId.touched) {
+                    <div class="text-danger">
+                        @if(propertyTypeId.errors?.['required']) {
+                        <span>This is Required</span>
+                        }
+                    </div>
+                    }
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="location" class="form-label">Location</label>
                         <input type="text" #location="ngModel" required class="form-control" name="location"
                             [(ngModel)]="formObj.location" id="location" placeholder="Enter Location">
+
+                        @if (location.touched) {
+                        <div class="text-danger">
+                            @if(location.errors?.['required']) {
+                            <span>This is Required</span>
+                            }
+                        </div>
+                        }
                     </div>
                     <div class="col-md-6">
                         <label for="pincode" class="form-label">Pincode</label>
                         <input type="text" #pincode="ngModel" class="form-control" name="pincode" required
                             [(ngModel)]="formObj.pincode" id="pincode" placeholder="Enter Pincode">
+
+                        @if (pincode.touched) {
+                        <div class="text-danger">
+                            @if(pincode.errors?.['required']) {
+                            <span>This is Required</span>
+                            }
+                        </div>
+                        }
                     </div>
                 </div>
 
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="city" class="form-label">City</label>
-                        <input type="text" class="form-control" name="city" [(ngModel)]="formObj.city" id="city"
-                            placeholder="Enter City">
+                        <input type="text" class="form-control" required name="city" #city="ngModel" [(ngModel)]="formObj.city"
+                            id="city" placeholder="Enter City">
+
+                        @if (city.touched) {
+                        <div class="text-danger">
+                            @if(city.errors?.['required']) {
+                            <span>This is Required</span>
+                            }
+                        </div>
+                        }
                     </div>
                     <div class="col-md-6">
                         <label for="state" class="form-label">State</label>
-                        <input type="text" class="form-control" name="state" [(ngModel)]="formObj.state" id="state"
-                            placeholder="Enter State">
+                        <input type="text" class="form-control" required name="state" #state="ngModel"
+                            [(ngModel)]="formObj.state" id="state" placeholder="Enter State">
+
+                        @if (state.touched) {
+                        <div class="text-danger">
+                            @if(state.errors?.['required']) {
+                            <span>This is Required</span>
+                            }
+                        </div>
+                        }
                     </div>
                 </div>
-                <button type="button" (click)="onSave()" class="btn btn-primary">Save</button>
+                <button type="button" (click)="onSave()" [disabled] = "!myForm.form.valid" class="btn btn-primary">Save</button>
             </form>
         </div>
     </div>

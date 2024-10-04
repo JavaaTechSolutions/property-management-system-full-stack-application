@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { LoginResponse } from '../models/login-response';
 import { SignupRequest } from '../models/signup-request';
 import { SignupResponse } from '../models/signup-response';
+import { Property } from '../models/property';
+import { PropertyResponse } from '../models/master';
 
 const BASE_URL = "http://localhost:8080/api";
 
@@ -25,5 +27,9 @@ export class IntegrationService {
 
   doRegister(request: SignupRequest):Observable<SignupResponse> {
     return this.http.post<SignupResponse>(BASE_URL + "/doRegister", request);
+  }
+
+  saveProperty(request: Property):Observable<PropertyResponse> {
+    return this.http.post<PropertyResponse>(BASE_URL + "/savePropertyDetails", request);
   }
 }
