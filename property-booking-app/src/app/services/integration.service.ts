@@ -32,4 +32,13 @@ export class IntegrationService {
   saveProperty(request: Property):Observable<PropertyResponse> {
     return this.http.post<PropertyResponse>(BASE_URL + "/savePropertyDetails", request);
   }
+
+  getAllProperety():Observable<Property[]> {
+    return this.http.get<Property[]>(BASE_URL + "/getAllProperty");
+  }
+
+  deletePropertyById(id: number):Observable<any> {
+    return this.http.delete<any>(BASE_URL + '/deletePropertyById?id='+id)
+  }
+ 
 }

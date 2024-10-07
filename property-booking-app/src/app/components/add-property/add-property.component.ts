@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Property } from '../../models/property';
 import { IntegrationService } from '../../services/integration.service';
@@ -13,9 +13,63 @@ import { IntegrationService } from '../../services/integration.service';
 })
 export class AddPropertyComponent {
 
+  isFormView = signal<boolean>(false);
   request: Property = new Property;
   formObj: Property = new Property();
   integrationService = inject(IntegrationService);
+  gridData: Property[] = [];
+
+  ngOnInit(): void {
+    this.getGridData();
+  }
+
+  getGridData() {
+    this.integrationService.getAllProperety().subscribe({
+      next: (res) => {
+        this.gridData = res;
+      }, error: (err) => {
+        console.log("Error response:" + err);
+      }
+    }); 
+  }
+
+  createNew() {
+    this.formObj = new Property;
+
+    this.isFormView.set(!this.isFormView());
+  }
+
+  onEdit(data: Property) {
+    this.formObj = data;
+
+    this.toggleView();
+  }
+
+  onUpdate() {
+
+  }
+
+  onDelete(data: Property) {
+    const isDelete = confirm('Are you Sure Want To Delete');
+
+    if (isDelete) {
+      this.integrationService.deletePropertyById(data.propertyId).subscribe({
+        next: (res) => {
+          if (res.response) {
+            alert("Record Deleted successfully.");
+            this.getGridData();
+          } else {
+            alert(res.response)
+          }
+        }
+      }) 
+    }
+
+  }
+
+  toggleView() {
+    this.isFormView.set(!this.isFormView())
+  }
 
   onSave() {
     this.request.city = this.formObj.city;
@@ -31,6 +85,10 @@ export class AddPropertyComponent {
         console.log("Property details saved successfully with id::"+res.propertyId);
 
         alert("Property details added successfully with id :: " + res.propertyId);
+
+        this.getGridData();
+
+        this.toggleView();
 
       }, error: (err) => {
         console.log("Error response:" + err);

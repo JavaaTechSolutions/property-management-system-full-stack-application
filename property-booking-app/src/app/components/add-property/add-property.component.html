@@ -1,4 +1,5 @@
 <div class="container mt-5">
+    @if (isFormView()) {
     <div class="card mb-4">
         <div class="card-header">
             <div class="row">
@@ -6,7 +7,7 @@
                     <h5>Create/Update Property</h5>
                 </div>
                 <div class="col-6 text-end">
-                    <!-- <button class="btn btn-sm btn-success" (click)="toggleView()">Go To List</button> -->
+                    <button class="btn btn-sm btn-success" (click)="toggleView()">Go To List</button>
                 </div>
             </div>
         </div>
@@ -79,8 +80,8 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="city" class="form-label">City</label>
-                        <input type="text" class="form-control" required name="city" #city="ngModel" [(ngModel)]="formObj.city"
-                            id="city" placeholder="Enter City">
+                        <input type="text" class="form-control" required name="city" #city="ngModel"
+                            [(ngModel)]="formObj.city" id="city" placeholder="Enter City">
 
                         @if (city.touched) {
                         <div class="text-danger">
@@ -104,8 +105,64 @@
                         }
                     </div>
                 </div>
-                <button type="button" (click)="onSave()" [disabled] = "!myForm.form.valid" class="btn btn-primary">Save</button>
+                <button type="button" (click)="onSave()" *ngIf="formObj.propertyId == 0"  [disabled]="!myForm.form.valid"
+                    class="btn btn-primary">Save</button>
+                    <button type="button" *ngIf="formObj.propertyId !== 0" (click)="onUpdate()"
+                    class="btn btn-warning">Update</button>
             </form>
         </div>
     </div>
+    } @else {
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-6">
+                    <h5>Property List</h5>
+                </div>
+                <div class="col-6 text-end">
+                    <button class="btn btn-sm btn-success" (click)="createNew()">Create New</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Property Title</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">City</th>
+                        <th scope="col">State</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngIf="gridData.length == 0">
+                        <tr>
+                            <td colspan="7" class="text-center">
+                                <p>No Record Found</p>
+                            </td>
+                        </tr>
+                    </ng-container>
+                    <ng-container *ngIf="gridData.length !== 0">
+                        <tr *ngFor="let data of gridData;let sr= index">
+                            <th scope="row">{{sr+1}}</th>
+                            <td>{{data.propertyTitle}}</td>
+                            <td>{{data.location}}</td>
+                            <td>{{data.city}}</td>
+                            <td>{{data.state}}</td>
+                            <td>
+                                <button class="btn btn-warning btn-sm mx-2" (click)="onEdit(data)">Edit</button>
+                                <button class="btn btn-danger btn-sm mx-2" (click)="onDelete(data)">Delete</button>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    }
+
+
 </div>
