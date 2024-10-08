@@ -1,5 +1,6 @@
 package com.jts.booking.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jts.booking.dto.DeleteResponse;
 import com.jts.booking.dto.SavePropertyRequest;
@@ -39,6 +41,13 @@ public class PropertyController {
 	@DeleteMapping("/deletePropertyById")
 	public ResponseEntity<DeleteResponse> deletePropertyById(@RequestParam long id) {
 		return new ResponseEntity<>(propertyService.deletePropertyById(id), HttpStatus.CREATED);
+	}
+	
+	@PostMapping("/uploadFilesIntoDB")
+	public ResponseEntity<String> storeFilesIntoDB(@RequestParam("file") MultipartFile file, @RequestParam long id) throws IOException {
+		propertyService.savePropertyImageById(file, id);
+
+		return ResponseEntity.status(HttpStatus.OK).body("Success");
 	}
 
 }

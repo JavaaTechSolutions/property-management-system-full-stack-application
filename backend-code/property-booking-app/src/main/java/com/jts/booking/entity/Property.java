@@ -1,6 +1,5 @@
 package com.jts.booking.entity;
 
-import java.sql.Blob;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -46,7 +45,7 @@ public class Property {
 	private String isBooked;
 
 	@Lob
-	private Blob photo;
+	private byte[] photo;
 
 	@Column(name = "created_date")
 	private LocalDate createdDate;

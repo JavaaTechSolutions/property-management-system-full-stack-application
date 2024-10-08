@@ -1,10 +1,12 @@
 package com.jts.booking.service;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jts.booking.dto.DeleteResponse;
 import com.jts.booking.dto.SavePropertyRequest;
@@ -48,6 +50,15 @@ public class PropertyService {
 		response.setResponse("Property Details deleted successfully");
 		
 		return response;
+	}
+	
+	public String savePropertyImageById(MultipartFile file, long id) throws IOException {
+		Property property = propertyRepository.findById(id).get();
+		property.setPhoto(file.getBytes());
+
+		propertyRepository.save(property);
+
+		return "File uploaded successfully into database";
 	}
 	
 	
