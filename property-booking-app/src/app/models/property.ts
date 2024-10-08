@@ -7,6 +7,7 @@ export class Property {
     pincode: string;
     state: string;
     createdDate: Date;
+    photo: any;
     lastUpdatedDate: Date;
 
     constructor() {
@@ -19,5 +20,6 @@ export class Property {
         this.location = '';
         this.propertyTypeId = '';
         this.pincode = '';
+        this.photo = new Blob;
     }
 }

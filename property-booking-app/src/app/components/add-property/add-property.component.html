@@ -105,9 +105,26 @@
                         }
                     </div>
                 </div>
-                <button type="button" (click)="onSave()" *ngIf="formObj.propertyId == 0"  [disabled]="!myForm.form.valid"
+
+                @if (formObj.propertyId == 0) {
+                <div class="row mb-3">
+                    <label for="propertyImage" class="form-label">Upload Property Image</label>
+                    <input type="file" accept="image/*" (change)="selectFile($event)" />
+                </div>
+                }
+
+                @if (formObj.propertyId !== 0) {
+                <div class="row mb-3">
+                    <label for="propertyImage" class="form-label">View Property</label>
+                    <img [src]="formObj.photo" height="150px" width="80px"
+                        style="max-width:200px !important;cursor:pointer" />
+                </div>
+                }
+
+
+                <button type="button" (click)="onSave()" *ngIf="formObj.propertyId == 0" [disabled]="!myForm.form.valid"
                     class="btn btn-primary">Save</button>
-                    <button type="button" *ngIf="formObj.propertyId !== 0" (click)="onUpdate()"
+                <button type="button" *ngIf="formObj.propertyId !== 0" (click)="onUpdate()"
                     class="btn btn-warning">Update</button>
             </form>
         </div>
@@ -134,6 +151,7 @@
                         <th scope="col">Location</th>
                         <th scope="col">City</th>
                         <th scope="col">State</th>
+                        <th scope="col">Image</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -152,6 +170,9 @@
                             <td>{{data.location}}</td>
                             <td>{{data.city}}</td>
                             <td>{{data.state}}</td>
+                            <td><img [src]="data.photo" height="30px" width="30px" style="max-width:100%;cursor:pointer"
+                                    (click)="onClick($event)" />
+                            </td>
                             <td>
                                 <button class="btn btn-warning btn-sm mx-2" (click)="onEdit(data)">Edit</button>
                                 <button class="btn btn-danger btn-sm mx-2" (click)="onDelete(data)">Delete</button>
@@ -163,6 +184,22 @@
         </div>
     </div>
     }
+</div>
 
-
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Property Image</h4>
+            </div>
+            <div class="modal-body">
+                <img src="{{imgSrc}}" style="max-width:100%;cursor:pointer" class="modal-hover-opacity" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closePopup()">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
 </div>

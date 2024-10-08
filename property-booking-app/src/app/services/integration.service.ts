@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginRequest } from '../models/login-request';
 import { Observable } from 'rxjs';
@@ -39,6 +39,17 @@ export class IntegrationService {
 
   deletePropertyById(id: number):Observable<any> {
     return this.http.delete<any>(BASE_URL + '/deletePropertyById?id='+id)
+  }
+
+  upload(file: File, propertyId: number): Observable<HttpEvent<any>> {
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+
+    const req = new HttpRequest('POST', BASE_URL + `/uploadFilesIntoDB?id=`+propertyId, formData, {
+      responseType: 'text'
+    });
+
+    return this.http.request(req);
   }
  
 }
