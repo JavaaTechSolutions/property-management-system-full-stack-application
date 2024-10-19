@@ -1,1 +1,67 @@
-<p>dashboard works!</p>
+<div class="container my-4">
+
+    <div class="row">
+        <!-- Total Property Widget -->
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header">Total Property</div>
+                <div class="card-body">
+                    <h5 class="card-title">Property</h5>
+                    <p class="card-text" id="totalProperty">{{response.totalProperty}}</p>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Total Available Property Widget -->
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Total Available Property</div>
+                <div class="card-body">
+                    <h5 class="card-title">Available Property</h5>
+                    <p class="card-text" id="totalAvailableProperty">{{response.totalAvailableProperty}}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Booked Property -->
+        <div class="col-md-4">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-header">Booked Property</div>
+                <div class="card-body">
+                    <h5 class="card-title">Booked Property</h5>
+                    <p class="card-text" id="bookedProperty">{{response.totalBookedProperty}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Latest Added Property -->
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">Latest Added Property</div>
+                <div class="card-body">
+                    <ul id="latestAddedProperty" class="list-group">
+                        @for (item of response.latestAddedProperty; track $index) {
+                        <li class="mx-2">{{item.propertyTitle}}</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">Latest Booked Property</div>
+                <div class="card-body">
+                    <ul id="latestBookedProperty" class="list-group">
+                        @for (item of response.latestBookedProperty; track $index) {
+                        <li class="mx-2">{{item.propertyTitle}}</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

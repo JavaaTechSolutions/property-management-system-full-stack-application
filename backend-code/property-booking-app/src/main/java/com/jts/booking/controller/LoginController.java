@@ -18,6 +18,7 @@ import com.jts.booking.dto.LoginRequest;
 import com.jts.booking.dto.LoginResponse;
 import com.jts.booking.dto.SignupRequest;
 import com.jts.booking.dto.SignupResponse;
+import com.jts.booking.service.DashboardService;
 import com.jts.booking.service.LoginService;
 
 @RestController
@@ -33,6 +34,9 @@ public class LoginController {
 	
 	@Autowired
 	private LoginService loginService;
+	
+	@Autowired
+	private DashboardService dashboardService;
 
 	@PostMapping("/doLogin")
 	public ResponseEntity<LoginResponse> doLogin(@RequestBody LoginRequest request) {
@@ -50,12 +54,7 @@ public class LoginController {
 
 	@GetMapping("/dashboard")
 	public ResponseEntity<DashboardResponse> dashboard() {
-		DashboardResponse response = new DashboardResponse();
-		response.setResponse("Success");
-		
-		System.out.println("Dashboard Response");
-		
-		return new ResponseEntity<>(response, HttpStatus.OK);
+		return new ResponseEntity<>(dashboardService.getDashboardData(), HttpStatus.OK);
 	}
 	
 	@PostMapping("/doRegister")
