@@ -1,0 +1,54 @@
+<div class="section">
+    <div class="container">
+        <div class="row mb-5 align-items-center">
+            <div class="col-lg-6">
+                <h2 class="font-weight-bold text-primary heading">
+                    Popular Properties
+                </h2>
+            </div>
+            
+        </div>
+        <div class="row">
+
+            <div class="col-12">
+                <div class="property-slider-wrap">
+                    <div class="property-slider">
+                        <div class="row">
+
+                            @for (item of properties; track $index) {
+                            <div class="col-3">
+                                <div class="property-item">
+                                    <a href="" class="img">
+                                        <img [src]="item.photo" height="150px !important" width="100%" />
+                                    </a>
+
+                                    <div class="property-content">
+                                        <div class="price mb-2"><span>40000 Rs.</span></div>
+                                        <div>
+                                            <span class="d-block mb-2 text-black-50">{{item.city}} |
+                                                {{item.state}}</span>
+                                            <span class="city d-block mb-2">{{item.propertyTitle}}</span>
+
+                                            <div class="specs d-flex mb-2">
+                                                <span class="d-block d-flex align-items-center me-3">
+                                                    <span class="icon-bed me-2"></span>
+                                                    <span class="caption">2 beds</span>
+                                                </span>
+                                                <span class="d-block d-flex align-items-center">
+                                                    <span class="icon-bath me-2"></span>
+                                                    <span class="caption">2 baths</span>
+                                                </span>
+                                            </div>
+
+                                            <a class="btn btn-primary py-2 px-3" (click)="bookProperty()">Book</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
