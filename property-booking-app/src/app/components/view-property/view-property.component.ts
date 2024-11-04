@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 import { IntegrationService } from '../../services/integration.service';
 import { Property } from '../../models/property';
 import { DomSanitizer } from '@angular/platform-browser';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-view-property',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './view-property.component.html',
   styleUrl: './view-property.component.css'
 })

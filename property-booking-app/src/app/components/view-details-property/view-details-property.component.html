@@ -1,0 +1,31 @@
+<div class="container mt-4">
+    <div class="card">
+      <div class="card-header">
+        <h3>{{properties.propertyTitle}}</h3>
+        <h6>{{properties.location}}</h6>
+      </div>
+      <div class="card-body">
+        <p>{{properties.city}} || {{properties.state}}</p>
+        <div id="propertyCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div *ngFor="let image of property.images; let i = index" class="carousel-item" [ngClass]="{'active': i === 0}">
+              <img [src]="image" class="d-block w-100" alt="Property Image">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#propertyCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#propertyCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-primary">Book</button>
+        <button class="btn btn-secondary">Learn More</button>
+      </div>
+    </div>
+  </div>
+  

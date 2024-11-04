@@ -6,6 +6,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { AddPropertyComponent } from './components/add-property/add-property.component';
 import { ViewPropertyComponent } from './components/view-property/view-property.component';
+import { ViewDetailsPropertyComponent } from './components/view-details-property/view-details-property.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -17,7 +18,8 @@ export const routes: Routes = [
         children: [
             { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
             { path: 'add-property', component: AddPropertyComponent, canActivate: [AuthGuard] },
-            { path: 'view-property', component: ViewPropertyComponent, canActivate: [AuthGuard] }
+            { path: 'view-property', component: ViewPropertyComponent, canActivate: [AuthGuard] },
+            { path: 'property-details/:id', component: ViewDetailsPropertyComponent }
         ]
     }
 ];

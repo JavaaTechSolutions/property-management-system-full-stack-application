@@ -35,6 +35,10 @@ export class IntegrationService {
     return this.http.post<PropertyResponse>(BASE_URL + "/savePropertyDetails", request);
   }
 
+  getPropertyById(id: number): Observable<Property> {
+    return this.http.get<Property>(BASE_URL + '/getPropertyById?id=' + id)
+  }
+
   getAllProperety(): Observable<Property[]> {
     return this.http.get<Property[]>(BASE_URL + "/getAllProperty");
   }

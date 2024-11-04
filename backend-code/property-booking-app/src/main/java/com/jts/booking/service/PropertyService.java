@@ -43,6 +43,10 @@ public class PropertyService {
 		return propertyRepository.findAll();
 	}
 	
+	public Property getPropertyById(long id) {
+		return propertyRepository.findById(id).get();
+	}
+	
 	public DeleteResponse deletePropertyById(long id) {
 		propertyRepository.deleteById(id);
 		

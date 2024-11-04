@@ -37,6 +37,11 @@ public class PropertyController {
 	public ResponseEntity<List<Property>> getAllProperty() {
 		return new ResponseEntity<>(propertyService.getAllProperty(), HttpStatus.CREATED);
 	}
+	
+	@GetMapping("/getPropertyById")
+	public ResponseEntity<Property> getPropertyById(@RequestParam long id) {
+		return new ResponseEntity<>(propertyService.getPropertyById(id), HttpStatus.OK);
+	}
 
 	@DeleteMapping("/deletePropertyById")
 	public ResponseEntity<DeleteResponse> deletePropertyById(@RequestParam long id) {
